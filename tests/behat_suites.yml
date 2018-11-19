@@ -1,0 +1,8 @@
+documentation:
+    suites:
+        enterpriseTutorial:
+            paths:
+                - '%paths.base%/tests/features'
+#                - '%paths.base%/vendor/ezsystems/developer-documentation/tests/features'
+            contexts:
+                - DeveloperDocumentation\Test\EnterpriseTutorialContext
