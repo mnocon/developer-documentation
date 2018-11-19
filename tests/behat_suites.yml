@@ -1,8 +1,10 @@
-documentation:
+doc:
     suites:
         enterpriseTutorial:
             paths:
-                - '%paths.base%/tests/features'
-#                - '%paths.base%/vendor/ezsystems/developer-documentation/tests/features'
+                - '%paths.base%/vendor/ezsystems/developer-documentation/tests/features'
             contexts:
-                - DeveloperDocumentation\Test\EnterpriseTutorialContext
+                - EzSystems\DeveloperDocumentation\Test\EnterpriseTutorialContext
+                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
+                - EzSystems\RepositoryForms\Behat\Context\ContentEditContext
+                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext
