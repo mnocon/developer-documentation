@@ -6,5 +6,3 @@ doc:
             contexts:
                 - EzSystems\DeveloperDocumentation\Test\EnterpriseTutorialContext
                 - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentEditContext
-                - EzSystems\RepositoryForms\Behat\Context\FieldTypeFormContext

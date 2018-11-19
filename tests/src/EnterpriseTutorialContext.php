@@ -8,6 +8,7 @@ namespace EzSystems\DeveloperDocumentation\Test;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
+use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct;
 
 class EnterpriseTutorialContext implements Context
@@ -31,29 +32,23 @@ class EnterpriseTutorialContext implements Context
     {
         $contentTypeCreateStruct = $this->contentTypeContext->newContentTypeCreateStruct($contentTypeIdentifier);
         $contentTypeCreateStruct->names = ['eng-GB' => $contentTypeName];
+        $fieldDefinitions = $this->createFieldDefinitions($fieldDetails);
 
-        foreach ($fieldDetails->getHash() as $field)
+        foreach ($fieldDefinitions as $definition)
         {
-            $contentTypeCreateStruct->addFieldDefinition(new FieldDefinitionCreateStruct($this->getFieldDefitiionData($field)));
+            $contentTypeCreateStruct->addFieldDefinition($definition);
         }
 
         $this->contentTypeContext->createContentType($contentTypeCreateStruct);
     }
 
     /**
-     * @Given I remove :fieldIdentifier field from :contentTypeIdentifier Content Type
+     * @Given I add field to :contentTypeIdentifier Content Type
      */
-    public function iRemoveFieldFromArticleContentType($fieldIdentifier, $contentTypeIdentifier)
+    public function iAddFieldToArticleContentType($contentTypeIdentifier, TableNode $fieldDetails)
     {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given I add :fieldIdentifier field to :contentTypeIdentifier Content Type
-     */
-    public function iAddFieldToArticleContentType($fieldIdentifier, $contentTypeIdentifier, TableNode $fieldDetails)
-    {
-        throw new PendingException();
+        $fieldDefinitions = $this->createFieldDefinitions($fieldDetails);
+        $this->contentTypeContext->addFieldsTo($contentTypeIdentifier, $fieldDefinitions);
     }
 
     /**
@@ -72,16 +67,30 @@ class EnterpriseTutorialContext implements Context
         throw new PendingException();
     }
 
-    private function getFieldDefitiionData(array $tableRow)
+    private function getFieldDefinitionData(array $tableRow, int $position)
     {
         return [
-            'identifier' => $this->fieldTypeMap[$tableRow['FieldType']],
-            'fieldTypeIdentifier' => $tableRow['Identifier'],
+            'fieldTypeIdentifier' => $this->fieldTypeMap[$tableRow['Field Type']],
+            'identifier' =>  $tableRow['Identifier'],
             'names' => ['eng-GB' => $tableRow['Name']],
+            'position' => $position,
             'isRequired' => $this->parseBool($tableRow['Required']),
             'isTranslatable' => $this->parseBool($tableRow['Translatable']),
             'isSearchable' => $this->parseBool($tableRow['Searchable']),
         ];
+    }
+
+    private function createFieldDefinitions(TableNode $fieldDetails) : array
+    {
+        $positionCounter = 1;
+        $fieldDefinitions = [];
+
+        foreach ($fieldDetails->getHash() as $field)
+        {
+            $fieldDefinitions[] = new FieldDefinitionCreateStruct($this->getFieldDefinitionData($field, $positionCounter++));
+        }
+
+        return $fieldDefinitions;
     }
 
     private function parseBool(string $value): bool
