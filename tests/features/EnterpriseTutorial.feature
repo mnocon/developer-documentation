@@ -15,24 +15,30 @@ Feature: Setup eZ Platform Enterprise dogs tutorial
 #    And I add field to Article Content Type
 #    | Field Type | Name  | Identifier |	Required | Searchable |	Translatable |
 #    | Image      | Image | image      | no	     | no         |	yes          |
-#    And I copy needed templates, configuration and style files
-#    And I create 3 "Folder" Content items in "Home"
-#        | contentName       |
-#        | All Articles      |
-#        | Dog Breed Catalog |
-#        | ALl Tips          |
-#    And I create 4 "Article" Content items in "Home/Dog Breed Catalog"
-#        | contentName | image |
-#        | Article1    | path1 |
-#        | Article2    | path2 |
-#        | Article3    | path3 |
-#        | Article4    | path4 |
-#    And I create 3 "Tip" Content items in "Home/All Tips"
-#        | contentName | image |
-#        | Tip1        | path1 |
-#        | Tip2        | path2 |
-#        | Tip3        | path3 |
-#        | Tip4        | path4 |
+#    And test
+    And I create "folder" Content items in "Home"
+        | contentName       |
+        | All Articles      |
+        | Dog Breed Catalog |
+        | ALl Tips          |
+    And I create "article" Content items in "Home/All Articles"
+        | contentName                               | imageName    |
+        | Dog favorites                             | article1.jpg |
+        | Adopt or buy?                             | article2.jpg |
+        | Dogs and other pets                       | article3.jpg |
+        | Taking care of your dog during a heatwave | article4.jpg |
+        | Dog owner's first steps                   | article5.jpg |
+        | Traveling with your dog                   | article6.jpg |
+#        And I create "dog_breed" Content items in "Home/Dog Breed Catalog"
+#        | contentName          | image |
+#        | Alsatian             | path1 |
+#        | King Charles Spaniel | path2 |
+#        | St Bernard           | path3 |
+    And I create "tip" Content items in "Home/All Tips"
+        | contentName |
+        | Tip1        |
+        | Tip2        |
+        | Tip3        |
 
     Scenario: Prepare the Landing Page
 

@@ -8,8 +8,8 @@ namespace EzSystems\DeveloperDocumentation\Test;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\TableNode;
-use eZ\Publish\API\Repository\Values\Content\Field;
 use eZ\Publish\API\Repository\Values\ContentType\FieldDefinitionCreateStruct;
+use Symfony\Component\Yaml\Yaml;
 
 class EnterpriseTutorialContext implements Context
 {
@@ -49,22 +49,6 @@ class EnterpriseTutorialContext implements Context
     {
         $fieldDefinitions = $this->createFieldDefinitions($fieldDetails);
         $this->contentTypeContext->addFieldsTo($contentTypeIdentifier, $fieldDefinitions);
-    }
-
-    /**
-     * @Given I copy needed templates, configuration and style files
-     */
-    public function iCopyNeededTemplatesConfigurationAndStyleFiles()
-    {
-        throw new PendingException();
-    }
-
-    /**
-     * @Given I create :arg3 :arg1 Content items in :arg2
-     */
-    public function iCreateContentItemsIn($arg1, $arg2, $arg3)
-    {
-        throw new PendingException();
     }
 
     private function getFieldDefinitionData(array $tableRow, int $position)

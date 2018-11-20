@@ -5,4 +5,7 @@ doc:
                 - '%paths.base%/vendor/ezsystems/developer-documentation/tests/features'
             contexts:
                 - EzSystems\DeveloperDocumentation\Test\EnterpriseTutorialContext
-                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext
+                - EzSystems\DeveloperDocumentation\Test\ConfigurationContext
+                - EzSystems\RepositoryForms\Behat\Context\ContentTypeContext:
+                - EzSystems\DeveloperDocumentation\Test\ContentContext:
+                    repository: '@ezpublish.api.repository'
